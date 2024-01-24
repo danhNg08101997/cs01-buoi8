@@ -26,8 +26,14 @@ bullet_rect.y = 100
 gem = pygame.image.load('img/gem.png')
 gem = pygame.transform.scale(gem,(90, 50))
 gem_rect = gem.get_rect()
-gem_rect.x = 0
-gem_rect.y = 0 
+gem_rect.x = 300
+gem_rect.y = 300
+# score: surface text
+f_game = pygame.font.Font('./fonts/font_game.otf', 32)
+score = 0
+# background
+bg = pygame.image.load('./img/bg_game.jpg')
+bg = pygame.transform.scale(bg, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
 # Thiết lập vòng lặp game
 running = True
@@ -37,9 +43,15 @@ while running:
         if event.type == pygame.QUIT:
             running = False
     # Kịch bản game
-    screen.fill((255,255,255))
+    # screen.fill((255,255,255))
+    screen.blit(bg,(0,0))
     screen.blit(player, player_rect)
     screen.blit(bullet, bullet_rect)
+    screen.blit(gem, gem_rect)
+    # score
+    score_title = f_game.render(f'Score {score}', True, 'Red', 'White')
+    screen.blit(score_title, (SCREEN_WIDTH - score_title.get_width(), 0))
+
     # Cập nhật game
     pygame.display.flip()
 
